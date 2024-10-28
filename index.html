@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Login-Project</title>
+    <style>
+        :root {
+            --txt-color: #ffffff;
+            --bg-color: #2c2f33; /* رنگ پس‌زمینه تاریک برای صفحه */
+            --box-bg-color: rgba(255, 255, 255, 0.2); /* رنگ کادر با شفافیت کمتر */
+            --input-bg-color: rgba(255, 255, 255, 0.1); /* رنگ پس‌زمینه ورودی */
+            --input-border-color: #7289da; /* رنگ مرزی برای ورودی‌ها */
+            --btn-bg-color: #4CAF50; /* رنگ پس‌زمینه دکمه */
+            --btn-hover-color: #45a049; /* رنگ پس‌زمینه دکمه در حالت هاور */
+            --text-color: #ffffff; /* رنگ متن */
+            --hover-text-color: #ffffff; /* رنگ متن در حالت هاور */
+            --error-color: #ffffff; /* رنگ اخطارها */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Work Sans", sans-serif;
+        }
+
+        .full_screen {
+            height: 100vh; 
+            width: 100%;
+            background-color: var(--bg-color); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login_box {
+            height: auto; /* ارتفاع خودکار */
+            max-width: 350px; /* کاهش عرض */
+            width: 90%; /* عرض ریسپانسیو */
+            background: var(--box-bg-color);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 20px;
+        }
+
+        .login_box h1 {
+            color: var(--txt-color);
+            margin-bottom: 20px; /* فاصله زیر عنوان */
+            font-size: 1.5rem; /* اندازه بزرگتر */
+        }
+
+        .logo {
+            width: 60px; /* عرض لوگو */
+            height: auto; /* ارتفاع خودکار */
+            margin-bottom: 15px; /* فاصله زیر لوگو */
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .inputs input {
+            height: 45px;
+            width: 100%; /* عرض کامل */
+            border-radius: 25px;
+            margin-top: 15px;
+            padding: 0 20px;
+            border: 2px solid var(--input-border-color);
+            background-color: var(--input-bg-color); /* رنگ پس‌زمینه ورودی */
+            font-size: 1rem;
+            outline: none;
+            color: var(--txt-color); /* رنگ متن به سفید تغییر کرد */
+            transition: border-color 0.3s ease;
+        }
+
+        .inputs input::placeholder {
+            color: var(--txt-color); /* رنگ placeholder به سفید */
+            font-size: 0.8rem; /* اندازه کوچک */
+        }
+
+        .inputs input:focus {
+            border: 2px solid var(--btn-bg-color);
+        }
+
+        .remember {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin-top: 10px;
+            color: var(--txt-color);
+            font-size: 0.85rem;
+        }
+
+        .login_btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px; /* فاصله بیشتر */
+        }
+
+        .login_btn input {
+            height: 50px; /* ارتفاع بزرگتر */
+            width: 100%; /* عرض کامل */
+            border-radius: 25px;
+            margin-top: 15px;
+            padding: 0 20px;
+            border: 2px solid var(--btn-bg-color);
+            background-color: var(--btn-bg-color);
+            color: #ffffff; /* رنگ متن دکمه سفید */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.1rem; /* اندازه بزرگتر برای متن دکمه */
+        }
+
+        .login_btn input:hover {
+            background-color: var(--btn-hover-color);
+            border: 2px solid var(--txt-color);
+            color: var(--hover-text-color);
+        }
+
+        .reg {
+            margin-top: 15px;
+            color: var(--txt-color);
+        }
+
+        .reg a {
+            color: var(--btn-bg-color);
+            transition: color 0.3s ease;
+        }
+
+        .error {
+            color: var(--error-color); /* رنگ خطا به سفید */
+            margin-top: 15px; /* فاصله بالای پیام خطا */
+            text-align: center; /* مرکز چین برای متن خطا */
+            font-size: 0.9rem; /* اندازه کوچک‌تر */
+        }
+
+        @media (max-width: 480px) {
+            .login_box {
+                padding: 30px 15px; /* کاهش padding برای موبایل */
+            }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="full_screen">
+        <div class="login_box">
+            <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="Tether Logo" class="logo"> <!-- اضافه کردن لوگو -->
+            <h1>Usdt Wallet</h1>
+            <div class="inputs">
+                <input type="text" name="userName" placeholder="Username" id="username">
+                <input type="password" name="password" placeholder="Password" id="password">
+            </div>
+            <div class="remember">
+                <span><input type="checkbox" name="remember" id="remember" checked><p>Remember Me</p></span>
+            </div>
+            <div class="login_btn">
+                <input type="submit" value="Login" onclick="checkLogin()">
+            </div>
+            <div id="error" class="error"></div>
+        </div>
+    </div>
+</main>
+<script>
+    function checkLogin() {
+        const username = document.getElementById('username').value.toLowerCase(); // به حروف کوچک تبدیل شده
+        const password = document.getElementById('password').value;
+        const errorDiv = document.getElementById('error');
+
+        if (username === '' || password === '') {
+            showErrorMessage('Please enter your username and password!'); // پیام خطا به انگلیسی
+            return;
+        }
+
+        // تغییر نام کاربری به Danial72 و پسورد به dani043
+        if (username === 'danial72' && password === 'dani043') {
+            window.location.href = 'https://usdt.aramblog.ir/'; // آدرس صفحه اصلی را اینجا قرار دهید
+        } else {
+            showErrorMessage('Incorrect username or password!'); // پیام خطا به انگلیسی
+        }
+    }
+
+    function showErrorMessage(message) {
+        const errorDiv = document.getElementById('error');
+        errorDiv.textContent = message;
+
+        setTimeout(() => {
+            errorDiv.textContent = '';
+        }, 3000); // 3 ثانیه
+    }
+</script>
+</body>
+</html>
